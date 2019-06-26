@@ -1,0 +1,11 @@
+# USER-DEFINED ENVIRONMENT VARIABLES
+export expName=$1
+export modelClass="OM_1440x1080_C192"
+export SCRATCH="/lustre/f2/scratch/Matthew.Harrison"
+export rootDir="/lustre/f2/dev/Matthew.Harrison/MOM6-experiments.061219"
+export baseExpDir="$rootDir/land_ice_ocean_LM3_SIS2/$modelClass"
+export workDir="${SCRATCH}/$modelClass/$expName"
+timeStamp="${rootDir}/src/mkmf/bin/time_stamp.csh"
+ncCombine="${rootDir}/src/FRE-NCtools/postprocessing/mppnccombine/mppnccombine"
+export stageDir=$workDir/stage
+export target=gfdl:/archive/mjh/MOM6-experiments.061219/land_ice_ocean_LM3_SIS2/$modelClass/$expName

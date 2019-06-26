@@ -1,0 +1,43 @@
+diag_table
+data_table
+field_table
+input.nml
+MOM_input
+MOM_override
+MOM_layout
+SIS_input
+SIS_override
+SIS_layout
+Vertical_coordinate.nc
+#ATM grid files and mosaics
+INPUT/grid_spec.nc
+INPUT/C192_grid.tile*.nc
+INPUT/C192_mosaic.nc
+INPUT/C192_mosaic_*.nc
+#LND masks, river and soil files
+INPUT/land_mask_tile*.nc
+INPUT/river_data.tile*.nc
+INPUT/soil_brdf.nc
+INPUT/soil_type.nc
+INPUT/geohydrology.nc
+INPUT/geohydrology_table_2a2n.nc
+INPUT/topo_rough*.nc
+#INPUT/ground*.nc
+#OCN grid files and mosaics
+INPUT/ocean_hgrid.nc
+INPUT/ocean_mask.nc
+INPUT/ocean_mosaic.nc
+INPUT/topog.nc
+INPUT/All_edits.nc
+# misc MOM inputs
+INPUT/KH_background_2d.nc
+INPUT/MOM_channels_global_025
+INPUT/pmt_north.nc
+INPUT/pmt_south.nc
+INPUT/seawifs*
+INPUT/sst_ice_clim.nc
+INPUT/tidal_amplitude.nc
+INPUT/vgrid_75_2m.nc
+INPUT/WOA05_pottemp_salt.nc
+INPUT/layer_coord.nc
+INPUT/hycom1_75_800m.nc

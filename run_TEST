@@ -1,0 +1,157 @@
+#!/bin/bash
+###########################################
+#
+# THESE ARE BASIC SCRIPTS FOR BATCH SUBMISSION
+# USING SLURM.
+###########################################
+# USER-DEFINED ROOT DIRECTORY FOR RUNNING EXPERIMENTS. THIS COULD BE ONE OF THE MOM6-EXAMPLES FOR
+# INSTANCE (e.g. MOM6-examples/ice_ocean_SIS2/OM4_025)
+###########################################
+#SBATCH --chdir=/lustre/f2/dev/Matthew.Harrison/MOM6-experiments.061219/land_ice_ocean_LM3_SIS2/OM_1440x1080_C192
+#SBATCH --output=%x.o%j
+###########################################
+# USER-DEFINED JOB NAME
+###########################################
+#SBATCH --job-name=TEST
+#SBATCH --time=09:00:00
+#SBATCH --qos=urgent
+#SBATCH --partition=batch
+#SBATCH --mail-type=fail
+#SBATCH --export=modelClass=$modelClass,rootDir=$rootDir,expName=$expName,stageDir=$stageDir,baseExpDir=$baseExpDir,workDir=$workDir
+#SBATCH --clusters=c3
+#SBATCH --nodes=58
+#SBATCH --account=gfdl_O
+
+echoOn=0
+if [[ ! $echo ]]; then echoOn=1; fi
+runtimeBeg=`date "+%s"`
+if [[ $echoOn ]] ; then set echo; fi
+echo "<NOTE> : Starting at $HOST on `date`"
+
+# ---------------- initialize environment modules
+modulesHomeDir='/opt/modules/default'
+. $modulesHomeDir/init/bash
+module load fre/bronx-15
+
+
+# ---------------- Runtime parameters
+
+npes=1818
+atmos_npes=288
+ocean_npes=1530
+atmos_nthreads=1
+ocean_nthreads=1
+export expName=A01
+. setEnv $expName
+executable="${rootDir}/build/MOM6_SIS2_LM3.ncrc.intel.repro/MOM6_SIS2_LM3"
+
+cd $baseExpDir
+
+# ---------------- generate date for file names
+
+if [ ! -d $workDir ]; then mkdir -p $workDir;fi
+echo "Working directory: " $workDir
+if [ ! -d $workDir/INPUT ]; then mkdir $workDir/INPUT;fi
+if [ ! -d $workDir/RESTART ]; then mkdir $workDir/RESTART;fi
+if [ ! -d $stageDir ]; then mkdir $stageDir;fi
+cd $workDir
+
+if [ ! -f $workDir/input_file_list_copied ]; then
+
+if [ ! -f $workDir/input_file_list.txt ]; then
+   cp $baseExpDir/input_file_list.txt .
+fi
+
+###########################################
+# CUSTOMIZE THIS SECTION IF YOU NEED TO
+# EDIT OTHER INPUT FILES. BY DEFAULT, INPUT
+# FILES ARE SYMBOLICALLY LINKED FROM $baseExpDir
+# to $workDir.  INPUT FILES ARE LISTED IN
+# input_file_list.txt
+###########################################
+cat input_file_list.txt| while read line
+do
+if [[ "$line" =~ ^#.* ]]; then
+  continue
+elif [[ "$line" =~ ^INPUT.* ]]; then
+  echo $line
+  ln -sf $baseExpDir/$line INPUT
+elif [[ "$line" =~ ^input.nml ]]; then
+  echo $line
+  cp $baseExpDir/$line .
+elif [[ "$line" =~ ^MOM_override ]]; then
+  echo $line
+  cp $baseExpDir/$line .
+elif [[ "$line" =~ ^SIS_override ]]; then
+  echo $line
+  cp $baseExpDir/$line .
+else
+  echo $line
+  ln -sf $baseExpDir/$line $line
+fi
+done
+
+###########################################
+#EXAMPLE MODIFICATIONS TO input.nml
+###########################################
+#sed -i "s/current_date = 1991/current_date = 1982/g" input.nml
+###########################################
+#EXAMPLE LINK TO AN INPUT FILE NEEDED
+#FOR THE CURRENT EXPERIMENT
+###########################################
+#ln -s $baseExpDir/INPUT/SODA/soda3.4.2_mn_ocean_reg_1988.nc INPUT/.
+
+
+###########################################
+#LINK TO FORCING DATA - MODEL IS RUN IN
+#ANNUAL SEGMENTS
+###########################################
+c=`grep 'current_date' input.nml`
+set $c
+fyear=$3
+fyear=`echo $fyear | cut -d',' -f1`
+cd INPUT
+fList='t10 q10 u10 v10 psurf dswrs dlwrs precip'
+for f in $fList; do
+    rm ${f}.nc
+    ln -s /lustre/f2/pdata/gfdl/gfdl_shared/Matthew.Harrison/reanalysis/MERRA-2/${f}/${f}_merra_${fyear}.nc ${f}.nc
+done
+
+rm avhrr-only-v2.nc
+ln -s /lustre/f2/pdata/gfdl/gfdl_shared/Matthew.Harrison/obs/NOAA-OISST-v2/avhrr-only-v2.${fyear}.nc avhrr-only-v2.nc
+
+###########################################
+#EXTRACT FILES NEEDED FOR INITIALIZATION
+###########################################
+
+tar xvf $baseExpDir/INPUT/20120101.land.res.tar
+tar xvf /lustre/f2/pdata/gfdl/gfdl_W/Ming.Zhao/hiresmip/land_data/c192/c192_OM4_025_hydrography_v20170413.tar
+
+cd ..
+
+
+cat >> SIS_override<<EOF
+
+
+EOF
+
+cat >> MOM_override<<EOF
+
+
+EOF
+touch input_file_list_copied
+
+
+fi
+
+cd $workDir
+
+
+#   # ---------------- run a segment
+srun-multi -n $atmos_npes $executable : -n $ocean_npes $executable >& output
+
+
+if [ $? == 0 ] ; then
+ cd $baseExpDir
+ sbatch pp_launcher.bash  --export=modelClass=$modelClass,rootDir=$rootDir,expName=$expName,stageDir=$stageDir,baseExpDir=$baseExpDir,workDir=$workDir,resubmit=$resubmit
+fi
