@@ -9,7 +9,7 @@
 	url = git@github.com:NOAA-GFDL/icebergs.git
 [submodule "src/coupler"]
 	path = src/coupler
-	url = git@github.com:NOAA-GFDL/coupler.git
+	url = git@github.com:MJHarrison-GFDL/coupler.git
 [submodule "src/atmos_null"]
 	path = src/atmos_null
 	url = git@github.com:NOAA-GFDL/atmos_null.git
