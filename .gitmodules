@@ -27,7 +27,7 @@
 	url = git@github.com:NOAA-GFDL/ice_param.git
 [submodule "src/FMS"]
 	path = src/FMS
-	url = git@github.com:NOAA-GFDL/FMS.git
+	url = git@github.com:MJHarrison-GFDL/FMS.git
 [submodule "src/Icepack"]
 	path = src/Icepack
 	url = https://github.com/CICE-Consortium/Icepack

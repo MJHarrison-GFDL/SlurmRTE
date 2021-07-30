@@ -33,7 +33,7 @@ build/MOM6.$(PLATFORM).$(COMPILER).debug/libMOM6.a: build/shared.$(PLATFORM).$(C
 
 	mkdir -p build/MOM6.$(PLATFORM).$(COMPILER).debug
 	(cd build/MOM6.$(PLATFORM).$(COMPILER).debug/; rm -f path_names; ../../src/mkmf/bin/list_paths -l \
-	../../src/MOM6/config_src/{infra/FMS,memory/dynamic_symmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
+	../../src/MOM6/config_src/{infra/FMS1,memory/dynamic_symmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
         ../../src/MOM6/config_src/drivers/FMS_cap \
         ../../src/MOM6/{src/*,src/*/*,src/*/*/*} ../../src/SIS2/config_src/{external/Icepack_interfaces,dynamic_symmetric} ../../src/SIS2/src/* \
 	../../src/icebergs/* ../../src/ice_param/*  ;\
@@ -48,7 +48,7 @@ build/MOM6.$(PLATFORM).$(COMPILER).repro/libMOM6.a: build/shared.$(PLATFORM).$(C
 
 	mkdir -p build/MOM6.$(PLATFORM).$(COMPILER).repro
 	(cd build/MOM6.$(PLATFORM).$(COMPILER).repro/; rm -f path_names; ../../src/mkmf/bin/list_paths -l \
-	../../src/MOM6/config_src/{infra/FMS,memory/dynamic_symmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
+	../../src/MOM6/config_src/{infra/FMS1,memory/dynamic_symmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
         ../../src/MOM6/config_src/drivers/FMS_cap \
         ../../src/MOM6/{src/*,src/*/*,src/*/*/*} ../../src/SIS2/config_src/{external/Icepack_interfaces,dynamic_symmetric} ../../src/SIS2/src/* \
 	../../src/icebergs/* ../../src/ice_param/*  ;\
@@ -63,7 +63,7 @@ build/MOM6_asym.$(PLATFORM).$(COMPILER).debug/libMOM6.a: build/shared.$(PLATFORM
 
 	mkdir -p build/MOM6_asym.$(PLATFORM).$(COMPILER).debug
 	(cd build/MOM6_asym.$(PLATFORM).$(COMPILER).debug/; rm -f path_names; ../../src/mkmf/bin/list_paths -l \
-	../../src/MOM6/config_src/{infra/FMS,memory/dynamic_nonsymmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
+	../../src/MOM6/config_src/{infra/FMS1,memory/dynamic_nonsymmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
         ../../src/MOM6/config_src/drivers/FMS_cap \
 	../../src/MOM6/{src/*,src/*/*,src/*/*/*} ../../src/SIS2/config_src/{external/Icepack_interfaces,dynamic} ../../src/SIS2/src/* \
 	../../src/icebergs/* ../../src/ice_param/*  ;\
@@ -77,7 +77,7 @@ build/MOM6_asym.$(PLATFORM).$(COMPILER).repro/libMOM6.a: build/shared.$(PLATFORM
 
 	mkdir -p build/MOM6_asym.$(PLATFORM).$(COMPILER).repro
 	(cd build/MOM6_asym.$(PLATFORM).$(COMPILER).repro/; rm -f path_names; ../../src/mkmf/bin/list_paths -l \
-	../../src/MOM6/config_src/{infra/FMS,memory/dynamic_nonsymmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
+	../../src/MOM6/config_src/{infra/FMS1,memory/dynamic_nonsymmetric,external/{ODA_hooks,GFDL_ocean_BGC}}  \
         ../../src/MOM6/config_src/drivers/FMS_cap \
 	../../src/MOM6/{src/*,src/*/*,src/*/*/*} ../../src/SIS2/config_src/{external/Icepack_interfaces,dynamic} ../../src/SIS2/src/* \
 	../../src/icebergs/* ../../src/ice_param/*  ;\
