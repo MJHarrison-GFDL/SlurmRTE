@@ -22,18 +22,19 @@ subroutine qscomp(T, p, qsat, DqsatDT )
   real, intent(in) :: p    ! pressure
   real, intent(out):: qsat ! saturated specific humidity
   real, intent(out), optional :: DqsatDT ! deriv of specific humidity w.r.t. T
-
+  real , parameter :: T_min = 120.0, T_max=373.0
   real :: esat ! sat. water vapor pressure
 
-  call check_temp_range(T,'qscomp','temperature')
+
+!  call check_temp_range(T,'qscomp','temperature')
 
   ! calculate saturated specific humidity
-  call escomp(T,esat)
+  call escomp(max(T_min,min(T,T_max)),esat)
   qsat = d622*esat /(p-d378*esat )
 
   ! if requested, calculate the derivative of qsat w.r.t. temperature
   if (present(DqsatDT)) then
-     call escomp(T+del_temp,esat)
+     call escomp(max(T_min,min(T+del_temp,T_max)),esat)
      DqsatDT = (d622*esat/(p-d378*esat)-qsat)/del_temp
   endif
 end subroutine qscomp

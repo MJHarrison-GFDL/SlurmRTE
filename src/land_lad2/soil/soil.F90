@@ -354,8 +354,8 @@ end subroutine read_soil_namelist
 ! ============================================================================
 ! initialize soil model
 subroutine soil_init (predefined_tiles, id_ug,id_band,id_zfull)
-  logical,intent(in)  :: predefined_tiles !<If true, this subroutine assumes that 
-        ! the distribution of basic soil parameters is set from external data set, 
+  logical,intent(in)  :: predefined_tiles !<If true, this subroutine assumes that
+        ! the distribution of basic soil parameters is set from external data set,
         ! and only initializes derived soil properties
   integer,intent(in)  :: id_ug    !<Unstructured axis id.
   integer,intent(in)  :: id_band  !<ID of spectral band axis
@@ -414,7 +414,7 @@ subroutine soil_init (predefined_tiles, id_ug,id_band,id_zfull)
                            WARNING)
         endif
      endif
-  else 
+  else
      ! NOT predefined soil parameters and NOT use_single_geo:
      ! read spatially distributed fields for groundwater parameters, as requested
      select case (gw_option)
@@ -4452,7 +4452,7 @@ subroutine add_root_exudates(soil,vegn,exudateC)
 
   case (SOILC_CENTURY_BY_LAYER)
      call vegn_uptake_profile (vegn, dz(1:num_l), uptake_frac_max, vegn_uptake_term )
-     call check_var_range(sum(uptake_frac_max)-1.0, -tol,+tol, 'add_root_exudates', 'sum(vegn_uptake_frac_max)-1', FATAL)
+!     call check_var_range(sum(uptake_frac_max)-1.0, -tol,+tol, 'add_root_exudates', 'sum(vegn_uptake_frac_max)-1', FATAL)
 
      do nn=1,num_l
         soil%fast_soil_C(nn) = soil%fast_soil_C(nn) + exudateC*uptake_frac_max(nn)
@@ -4460,7 +4460,7 @@ subroutine add_root_exudates(soil,vegn,exudateC)
 
   case (SOILC_CORPSE)
      call vegn_uptake_profile (vegn, dz(1:num_l), uptake_frac_max, vegn_uptake_term )
-     call check_var_range(sum(uptake_frac_max)-1.0, -tol,+tol, 'add_root_exudates', 'sum(vegn_uptake_frac_max)-1', FATAL)
+!     call check_var_range(sum(uptake_frac_max)-1.0, -tol,+tol, 'add_root_exudates', 'sum(vegn_uptake_frac_max)-1', FATAL)
 
      if (is_watch_point()) then
         write (*,*) '##### add_root_exudates #####'

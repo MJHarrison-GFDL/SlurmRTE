@@ -1447,7 +1447,7 @@ subroutine update_land_model_fast_0d(tile, l, k, land2cplr, &
   ! sanity checks of some input values
   call check_var_range(precip_l, precip_warning_tol, HUGE(1.0), 'land model input', 'precip_l', WARNING)
   call check_var_range(precip_s, precip_warning_tol, HUGE(1.0), 'land model input', 'precip_s', WARNING)
-  call check_temp_range(atmos_T,                   'land model input', 'atmos_T')
+!  call check_temp_range(atmos_T,                   'land model input', 'atmos_T')
   call check_var_range(ISa_dn_dir, 0.0, 1360.0,    'land model input', 'sw.down.dir', WARNING)
   call check_var_range(ISa_dn_dif, 0.0, 1360.0,    'land model input', 'sw.down.dif', WARNING)
   call check_var_range(ILa_dn,     0.0, 1360.0,    'land model input', 'lw.down',     WARNING)
@@ -1584,7 +1584,7 @@ subroutine update_land_model_fast_0d(tile, l, k, land2cplr, &
      con_g_v  = grnd_rh/(1-grnd_rh)*DEaDqc/rho
      grnd_rh  = 1.0
   endif
-  call check_temp_range(grnd_T,'update_land_model_fast_0d','grnd_T')
+!  call check_temp_range(grnd_T,'update_land_model_fast_0d','grnd_T')
   call qscomp(grnd_T, p_surf, qsat, DqsatDTg)
   grnd_q   = grnd_rh * qsat
   Eg0      =  rho*con_g_v*(grnd_q  - tile%cana%tr(isphum))
@@ -2772,7 +2772,7 @@ subroutine update_land_bc_fast (tile, l ,k, land2cplr, is_init)
   call send_tile_data(id_snd, max(snow_depth,0.0),     tile%diag)
   call send_tile_data(id_snc, snow_area*100,           tile%diag)
   ! --- debug section
-  call check_temp_range(land2cplr%t_ca(l,k),'update_land_bc_fast','T_ca')
+!  call check_temp_range(land2cplr%t_ca(l,k),'update_land_bc_fast','T_ca')
 
 end subroutine update_land_bc_fast
 
@@ -4121,4 +4121,3 @@ DEFINE_TAG_ACCESSOR(soil)
 DEFINE_TAG_ACCESSOR(vegn)
 
 end module land_model_mod
-

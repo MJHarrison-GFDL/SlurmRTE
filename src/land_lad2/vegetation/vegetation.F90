@@ -1022,7 +1022,7 @@ subroutine vegn_step_1 ( vegn, soil, diag, &
   endif
 
   ! check the range of input temperature
-  call check_temp_range(cohort%Tv,'vegn_step_1','cohort%Tv')
+  !call check_temp_range(cohort%Tv,'vegn_step_1','cohort%Tv')
 
   ! calculate the fractions of intercepted precipitation
   vegn_ifrac = cohort%cover
