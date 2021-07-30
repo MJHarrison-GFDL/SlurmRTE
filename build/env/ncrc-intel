@@ -1,0 +1,13 @@
+source /opt/modules/default/init/bash
+module unload PrgEnv-pgi
+module unload PrgEnv-pathscale
+module unload PrgEnv-intel
+module unload PrgEnv-gnu
+module unload PrgEnv-cray
+module load PrgEnv-intel
+module swap intel intel/16.0.3.210
+module unload netcdf
+module load cray-netcdf
+module load cray-hdf5
+#module load ddt
+#module list
