@@ -152,7 +152,6 @@ build/MOM6_SIS2_LM3.$(PLATFORM).$(COMPILER).debug/MOM6_SIS2_LM3: build/MOM6.$(PL
 	(cd build/MOM6_SIS2_LM3.$(PLATFORM).$(COMPILER).debug/; \
 	rm -f path_names; ../../src/mkmf/bin/list_paths -l  ../../src/land_lad2 \
         ../../src/ice_param ../../src/atmos_null ../../src/coupler;\
-        mv path_names path_names.orig; egrep -v 'coupler_types.F90' path_names.orig > path_names; \
 	../../src/mkmf/bin/mkmf -t ../../src/mkmf/templates/$(PLATFORM)-$(COMPILER).mk -o  '-I../../src/FMS/include -I../../src/MOM6/src/framework \
         -I../../src/MOM6/config_src/memory/dynamic_symmetric -I../MOM6.$(PLATFORM).$(COMPILER).debug  -I../shared.$(PLATFORM).$(COMPILER).debug' \
         -l '-L../MOM6.$(PLATFORM).$(COMPILER).debug -lMOM6 -L../shared.$(PLATFORM).$(COMPILER).debug -lfms ' \
@@ -165,7 +164,6 @@ build/MOM6_SIS2_LM3.$(PLATFORM).$(COMPILER).repro/MOM6_SIS2_LM3: build/MOM6.$(PL
 	(cd build/MOM6_SIS2_LM3.$(PLATFORM).$(COMPILER).repro/; \
 	rm -f path_names; ../../src/mkmf/bin/list_paths -l  ../../src/land_lad2 \
         ../../src/ice_param ../../src/atmos_null ../../src/coupler;\
-        mv path_names path_names.orig; egrep -v 'coupler_types.F90' path_names.orig > path_names; \
 	../../src/mkmf/bin/mkmf -t ../../src/mkmf/templates/$(PLATFORM)-$(COMPILER).mk -o  '-I../../src/FMS/include -I../../src/MOM6/src/framework \
         -I../../src/MOM6/config_src/memory/dynamic_symmetric -I../MOM6.$(PLATFORM).$(COMPILER).repro  -I../shared.$(PLATFORM).$(COMPILER).repro' \
         -l '-L../MOM6.$(PLATFORM).$(COMPILER).repro -lMOM6 -L../shared.$(PLATFORM).$(COMPILER).repro -lfms ' \
