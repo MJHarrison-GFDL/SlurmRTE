@@ -1,6 +1,6 @@
 SHELL = bash
 PLATFORM = ncrc
-COMPILER = gnu
+COMPILER = intel
 RESULTS = results/$(PLATFORM)/$(COMPILER)/repro
 RUN_CMD = srun
 

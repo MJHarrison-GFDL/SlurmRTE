@@ -7,7 +7,7 @@
 # USER-DEFINED ROOT DIRECTORY FOR RUNNING EXPERIMENTS. THIS COULD BE ONE OF THE MOM6-EXAMPLES FOR
 # INSTANCE (e.g. MOM6-examples/ice_ocean_SIS2/OM4_025)
 ###########################################
-#SBATCH --chdir=/lustre/f2/dev/Matthew.Harrison/MOM6-experiments.061219/land_ice_ocean_LM3_SIS2/OM_1440x1080_C192
+#SBATCH --chdir=/lustre/f2/dev/Matthew.Harrison/SlurmRTE
 #SBATCH --output=%x.o%j
 ###########################################
 # USER-DEFINED JOB NAME
@@ -31,7 +31,7 @@ echo "<NOTE> : Starting at $HOST on `date`"
 # ---------------- initialize environment modules
 modulesHomeDir='/opt/modules/default'
 . $modulesHomeDir/init/bash
-module load fre/bronx-15
+module load fre/bronx-18
 
 
 # ---------------- Runtime parameters
@@ -42,8 +42,9 @@ ocean_npes=1530
 atmos_nthreads=1
 ocean_nthreads=1
 export expName=A01
-. setEnv $expName
+setEnv $expName
 executable="${rootDir}/build/MOM6_SIS2_LM3.ncrc.intel.repro/MOM6_SIS2_LM3"
+export resubmit=0
 
 cd $baseExpDir
 

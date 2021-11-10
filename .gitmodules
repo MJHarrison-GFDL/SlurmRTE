@@ -17,8 +17,8 @@
 	path = src/land_null
 	url = git@github.com:NOAA-GFDL/land_null.git
 [submodule "src/land_lad2"]
-	path = land_lad2
-	url = https://gitlab.gfdl.noaa.gov/fms/land_lad2.git
+	path = src/land_lad2
+	url = https://github.com/NOAA-GFDL/lm4.git
 [submodule "src/mkmf"]
 	path = src/mkmf
 	url = git@github.com:NOAA-GFDL/mkmf.git
