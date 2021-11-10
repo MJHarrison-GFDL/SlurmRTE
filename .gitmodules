@@ -31,3 +31,18 @@
 [submodule "src/Icepack"]
 	path = src/Icepack
 	url = https://github.com/CICE-Consortium/Icepack
+[submodule "src/ocean_amip"]
+	path = src/ocean_amip
+	url = https://gitlab.gfdl.noaa.gov/fms/ocean_amip.git
+[submodule "src/atmos_solo_land"]
+	path = src/atmos_solo_land
+	url = https://gitlab.gfdl.noaa.gov/fms/atmos_solo_land.git
+[submodule "src/ice_amip"]
+	path = src/ice_amip
+	url = https://gitlab.gfdl.noaa.gov/fms/ice_amip.git
+[submodule "src/atmos_shared"]
+	path = src/atmos_shared
+	url = https://gitlab.gfdl.noaa.gov/fms/atmos_shared.git
+[submodule "src/atmos_param"]
+	path = src/atmos_param
+	url = https://gitlab.gfdl.noaa.gov/fms/atmos_param.git

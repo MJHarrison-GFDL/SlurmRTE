@@ -5,7 +5,8 @@ module unload PrgEnv-gnu
 module unload PrgEnv-cray
 
 module load PrgEnv-gnu
-module swap gcc gcc/5.3.0
+module swap gcc gcc/7.3.0
+#module swap gcc gcc/8.3.0
 module unload netcdf
 module load cray-netcdf
 module load cray-hdf5
