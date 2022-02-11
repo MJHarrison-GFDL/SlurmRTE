@@ -46,3 +46,6 @@
 [submodule "src/atmos_param"]
 	path = src/atmos_param
 	url = https://gitlab.gfdl.noaa.gov/fms/atmos_param.git
+[submodule "src/ice_null"]
+	path = src/ice_null
+	url = git@github.com:NOAA-GFDL/ice_null
